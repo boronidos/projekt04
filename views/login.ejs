@@ -1,0 +1,20 @@
+<%- include("head.partial.ejs") %>
+
+<main>
+    <div class="menu">
+        <h1 class="gothic">Login</h1>
+        <form action="/login/" method="post">
+            <label for="login">login</label><input type="text" name="login" id="login"> <br>
+            <label for="password">password</label><input type="password" name="password" id="password"> <br>
+            <button type="submit">Login</button>
+        </form>
+        <form action="/register/" method="get">
+            <br>
+            <chuj style="font-size:  0.86vw;">Dont have an account?</chuj>
+            <button type="submit">Register</button>
+        </form>
+
+    </div>
+</main>
+
+<%- include("foot.partial.ejs") %>

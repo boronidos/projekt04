@@ -1,0 +1,29 @@
+<%- include("head.partial.ejs") %>
+
+<main>
+  <h1>Saves</h1>
+  <ul id="saves">
+    <% saves.forEach(function(save){ %>
+    <div class="save-display">
+      <li><%= save.name %> 
+        <ul>
+          <% save.data.forEach(function(d) { %>
+            <li><%= Object.keys(d)[0] %>: <%= Object.values(d)[0] %></li>
+          <% }) %>
+        </ul>
+        </li>
+        <div class="save-actions">
+          <form action="/saves/<%= save.id %>/edit" method="GET" style="display:inline">
+            <button class="edit-save" type="submit">Edit</button>
+          </form>
+          <form action="/saves/<%= save.id %>/delete" method="POST" style="display:inline" onsubmit="return confirm('Delete this save?');">
+            <button type="submit">Delete</button>
+          </form>
+          <button class="load-save-button" data-save-id="<%= save.id %>">Load</button>
+        </div>
+      </div>
+    <% }) %>
+  </ul>
+</main>
+
+<%- include("foot.partial.ejs") %>

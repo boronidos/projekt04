@@ -1,0 +1,46 @@
+<%- include("head.partial.ejs") %>
+
+<main>
+  <h1>Create new save</h1>
+  <div class="save-display">
+    <form action="/saves/new" method="POST">
+      <div>
+        <label for="name">Name: </label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          required
+          minlength="1"
+          maxlength="500"
+        />
+      </div>
+      <div>
+        <label for="difficulty">Difficulty</label>
+        <select
+          name="difficulty"
+          id="difficulty"
+          required
+        >
+          <option value="easy">easy</option>
+          <option value="medium">medium</option>
+          <option value="hard">hard</option>
+        </select>
+      </div>
+      <div>
+        <input
+          type="hidden"
+          name="progress"
+          id="progress"
+          required
+          value = "0%"
+        />
+      </div>
+      <div>
+        <button>Create save</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<%- include("foot.partial.ejs") %>

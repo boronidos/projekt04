@@ -1,0 +1,14 @@
+<%- include("head.partial.ejs") %>
+
+<main>
+    <h1><%= save.name %></h1>
+    <ul>
+      <% save.data.forEach(function(d) { %>
+        <li><%= Object.keys(d)[0] %>: <%= Object.values(d)[0] %></li>
+      <% }) %>
+    </ul>
+
+    <!-- TO DO: SOMEHOW LOAD THE GAME HERE??? -->
+</main>
+
+<%- include("foot.partial.ejs") %>
