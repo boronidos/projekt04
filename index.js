@@ -22,7 +22,10 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.render("index", { title: "Home" });
+  res.render("index", { 
+    title: "Home",
+    user_login: req.session.user_login 
+  });
 });
 
 app.use(express.static("public"));
@@ -31,12 +34,14 @@ app.get("/saves/", accounts.requireLogin, (req, res) => {
   res.render("saves", {
     title: "Load Save",
     saves: saves.getSaveSummaries(req.session.user_id),
+    user_login: req.session.user_login 
   });
 });
 
 app.get("/new_save/", accounts.requireLogin, (req, res) => {
   res.render("new_save", {
     title: "Create New Save",
+    user_login: req.session.user_login
   });
 });
 
@@ -45,20 +50,25 @@ app.get("/saves/:id/", (req, res) => {
   const saveId = req.params.id;
   const save = saves.getSave(saveId, req.session.user_id);
   if (!save) {
-    return res.status(404).render("save", { id: saveId, save: null, title: "save not found" });
+    return res.status(404).render("save", { id: saveId, save: null, title: "save not found", user_login: req.session.user_login });
   }
-  res.render("save", { id: saveId, save: save, title: `save ${saveId}` });
+  res.render("save", { 
+    id: saveId, save: save, title: `save ${saveId}`,
+    user_login: req.session.user_login
+  });
 });
 
 app.get("/register/", (req, res) => {
   res.render("register", {
     title: "Register",
+    user_login: req.session.user_login 
   });
 });
 
 app.get("/login/", (req, res) => {
   res.render("login", {
     title: "Login",
+    user_login: req.session.user_login 
   });
 });
 
@@ -83,7 +93,7 @@ app.get("/saves/:id/edit", (req, res) => {
   console.log(req.session.user_id);
   const id = req.params.id;
   const save = saves.getSave(id, req.session.user_id);
-  res.render("edit_save", { id, save, title: `Edit ${id}` });
+  res.render("edit_save", { id, save, title: `Edit ${id}`, user_login: req.session.user_login });
 });
 
 app.post("/saves/:id/edit", (req, res) => {
@@ -113,10 +123,11 @@ app.post("/register", async (req, res) => {
     return res.status(400).send("Login and password required");
   }
 
-  const ans = await accounts.registerAccount(login, password);
+  const user = await accounts.registerAccount(login, password);
 
-  if (ans !== false) {
-    req.session.user_id = ans;
+  if (user !== false) {
+    req.session.user_id = user.id;
+    req.session.user_login = user.login;
 
     req.session.save(() => {
       res.redirect("/");
@@ -133,14 +144,15 @@ app.get("/test", (req, res) => {
 app.post("/login", async (req, res) => {
   const { login, password } = req.body;
 
-  const id = await accounts.loginAccount(login, password);
-  console.log("Login result:", id);
+  const user = await accounts.loginAccount(login, password);
+  console.log("Login result:", user);
 
-  if (!id) {
+  if (!user) {
     return res.status(401).send("Invalid login");
   }
 
-  req.session.user_id = id;
+  req.session.user_id = user.id;
+  req.session.user_login = user.login;
 
   res.redirect("/new_save/");
 });

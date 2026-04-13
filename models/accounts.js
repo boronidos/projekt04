@@ -1,6 +1,26 @@
 import db from "./db.js";
 import * as bcrypt from "bcrypt"; 
 
+export async function loginAccount(login, password) {
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  if (login == "admin" && await bcrypt.compare("admin", hashedPassword)) {
+    return { id: -1, login: "admin" }; // Admin user id is -1
+  }
+
+  const user = db.getData(
+    "SELECT * FROM accounts WHERE login = ?",
+    [login]
+  );
+
+  console.log("DB result:", user);
+
+  if (user && await bcrypt.compare(password, user.password)) {
+    return user;
+  }
+  return false;
+}
+
 export async function registerAccount(login, password) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -24,29 +44,9 @@ export async function registerAccount(login, password) {
       [login]
     );
 
-    return user.id;
+    return user;
   }
 
-  return false;
-}
-
-export async function loginAccount(login, password) {
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  if (login == "admin" && await bcrypt.compare("admin", hashedPassword)) {
-    return -1; // Admin user id is -1
-  }
-
-  const user = db.getData(
-    "SELECT * FROM accounts WHERE login = ?",
-    [login]
-  );
-
-  console.log("DB result:", user);
-
-  if (user && await bcrypt.compare(password, user.password)) {
-    return user.id;
-  }
   return false;
 }
 

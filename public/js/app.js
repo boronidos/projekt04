@@ -7,7 +7,7 @@
         const play = document.querySelector(".play-button");
         const logout = document.querySelector(".logout-button");
 
-        const loadSaveButtons = document.querySelectorAll(".load-save-button");
+        const loadSaveButtons = document.querySelectorAll(".load-save-button");        
 
         // Make it keyboard accessible
         back.setAttribute("role", "button");
