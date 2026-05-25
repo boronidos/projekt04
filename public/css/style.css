@@ -4,6 +4,11 @@
   font-style: normal;
 }
 
+.error_text {
+    font-size: 1vw;
+    color: red;
+}
+
 html {
     image-rendering: pixelated;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

@@ -52,14 +52,21 @@ export function getSave(saveId, user_id) {
 export function addSave(saveId, data, user_id) {
   console.log(user_id);
   const uid = parseInt(user_id, 10);
+
   if (Number.isNaN(uid)) {
     throw new Error("Invalid user_id");
   }
+
   const existing = db.getData("SELECT id FROM saves WHERE id = ?", [saveId]);
   console.log(user_id);
   const name = saveId;
   const difficulty = data.difficulty || "";
   const progress = data.progress || "";
+
+  if (progress !== "" && (!Number.isInteger(parseInt(progress)) || parseInt(progress) < 0 || parseInt(progress) > 100)) {
+    throw new Error("Invalid progress: " + progress + ".");
+  }
+
   const now = new Date().toISOString();
 
   if (!existing) {
@@ -79,6 +86,7 @@ export function updateSave(saveId, data) {
   const difficulty = data.difficulty || "";
   const progress = data.progress || "";
   const name = data.name || "";
+
   const now = new Date().toISOString();
   db.runData(
     "UPDATE saves SET name = ?, difficulty = ?, progress = ?, updated_at = ? WHERE id = ?",

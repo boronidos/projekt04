@@ -7,6 +7,7 @@
             <label for="login">login</label><input type="text" name="login" id="login"> <br>
             <label for="password">password</label><input type="password" name="password" id="password"> <br>
             <button type="submit">Login</button>
+            <p class="error_text"><%= error === 'missing_fields' ? "Login and password required!" : error === 'user_not_found' ? "User not found!" : "" %></p>
         </form>
         <form action="/register/" method="get">
             <br>
