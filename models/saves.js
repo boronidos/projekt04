@@ -16,6 +16,9 @@ function rowToSave(row) {
 }
 
 export function getSaveSummaries(user_id) {
+
+  console.log("user_id =", user_id);
+
   if (accounts.isAdmin(user_id)) {
     const rows = db.getAllData("SELECT id, name, difficulty, progress, user_id FROM saves");
     return rows.map(rowToSave);

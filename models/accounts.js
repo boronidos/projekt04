@@ -18,15 +18,14 @@ export async function loginAccount(login, password) {
 }
 
 export function getLoginFromId(id) {
-  const existing = db.getData(
-    "SELECT * FROM accounts WHERE id = ?",
+  if (!id) return "";
+
+  const row = db.getData(
+    "SELECT login FROM accounts WHERE id = ?",
     [id]
   );
 
-  if (!existing) return ""
-  else {
-    return db.getData("SELECT login FROM accounts WHERE id = ?", [id]).login;
-  }
+  return row?.login || "";
 }
 
 export function isAdmin(user_id) {
@@ -34,6 +33,8 @@ export function isAdmin(user_id) {
       "SELECT admin FROM accounts WHERE id = ?",
       [user_id]
     );
+
+    console.log("ADMIN?", admin.admin != 0);
 
     return admin.admin != 0;
 }

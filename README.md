@@ -12,13 +12,14 @@ oraz dane dla każdego z nich.
 
 FUNKCJONALNOSC:
 mozna tworzyc saves, modyfikować je, usuwać oraz oglądać. Admin ma dostęp do wszystkich saves.
+(odpalanie save nie działa bo nie ma gry zrobionej)
 
 
 ```text
      /\__ /\
     /       \
    |  o   o  |
-   |     X  /
+   |     X   /
   /         |
  /          |
 C     U   U |
