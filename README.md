@@ -16,8 +16,8 @@ mozna tworzyc saves, modyfikować je, usuwać oraz oglądać. Admin ma dostęp d
 
 ```text
      /\__ /\
-    /      \
-   |  o   o |
+    /       \
+   |  o   o  |
    |     X  /
   /         |
  /          |
