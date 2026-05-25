@@ -186,6 +186,51 @@ input {
     height: 20vw;
 }
 
+.purplehead img{
+    position: fixed;
+    
+    pointer-events: none;
+
+    transform: rotate(-5deg);
+
+    bottom: 20vw;
+    left: 24vw;
+    width: 20vw;
+    height: 20vw;
+}
+
+.save-main {
+    display: flex;
+    align-items: center;
+
+    margin: 10vw;
+    margin-top: 2vw;
+
+    height: 20vw;
+
+    text-align: center;
+    flex-direction: column;
+
+    border: 3px solid black;
+    padding: 1vw;
+    margin-bottom: 1vw;
+    background-color: rgb(250, 240, 249);
+}
+
+.save-main .load-save-button {
+    transition: ease-in 100ms;
+
+    width: 10vw;
+    margin: 3vh 0;
+    font-size: 2vw;
+    font-weight: 500;
+}
+
+.save-main .load-save-button:hover {
+    transform: scale(0.98);
+    cursor: pointer;
+}
+
 .menu {
     text-align: center;
     display: flex;

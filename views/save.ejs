@@ -1,14 +1,18 @@
 <%- include("head.partial.ejs") %>
 
 <main>
+  <div class="save-main">
     <h1><%= save.name %></h1>
-    <ul>
+    <div>
       <% save.data.forEach(function(d) { %>
-        <li><%= Object.keys(d)[0] %>: <%= Object.values(d)[0] %></li>
+        <p><%= Object.keys(d)[0] %>: <%= Object.values(d)[0] %></p>
       <% }) %>
-    </ul>
+      </div>
 
+      <img class="load-save-button" src="/files/load-button.png">
     <!-- TO DO: SOMEHOW LOAD THE GAME HERE??? -->
+    <div class="purplehead"><img src="/files/purplehead.png" alt="purple head"></div>
+    </div>
 </main>
 
 <%- include("foot.partial.ejs") %>

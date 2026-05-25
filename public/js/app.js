@@ -5,6 +5,7 @@
         const home = document.querySelector(".home-button");
         const load = document.querySelector(".load-button");
         const play = document.querySelector(".play-button");
+
         const logout = document.querySelector(".logout-button");
 
         // 1. Only set attributes if the button actually exists
