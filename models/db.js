@@ -29,6 +29,7 @@ db.exec(`
 `);
 
 const countRow = db.prepare("SELECT COUNT(*) as c FROM saves").get();
+
 if (countRow && countRow.c === 0) {
   const now = new Date().toISOString();
 
