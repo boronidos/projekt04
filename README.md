@@ -14,10 +14,12 @@ FUNKCJONALNOSC:
 mozna tworzyc saves, modyfikować je, usuwać oraz oglądać. Admin ma dostęp do wszystkich saves.
 
 
-     /\__/\
+```text
+     /\__ /\
     /      \
    |  o   o |
    |     X  /
   /         |
  /          |
 C     U   U |
+```
