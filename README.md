@@ -1,13 +1,23 @@
+Aby uruchomic strone:
 npm install 
+node seed.js
 node index.js
 
-automatycznie tworzą sie użytkownicy:
+Automatycznie tworzą sie użytkownicy:
+admin, admin (admin)
 user1, password1
 user2, password2
-admin, admin (admin)
 
 oraz dane dla każdego z nich.
 
-(2 guzik load to jest logout)
-(guzik w prawym górnym rogu to home)
-nie umiałem ich w szkole zmienić
+FUNKCJONALNOSC:
+mozna tworzyc saves, modyfikować je, usuwać oraz oglądać. Admin ma dostęp do wszystkich saves.
+
+
+     /\__/\
+    /      \
+   |  o   o |
+   |     X  /
+  /         |
+ /          |
+C     U   U |

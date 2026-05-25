@@ -1,5 +1,6 @@
 import session, { Session } from "express-session";
 import db from "./db.js";
+import accounts from "./accounts.js";
 
 function rowToSave(row) {
   if (!row) return null;
@@ -10,12 +11,13 @@ function rowToSave(row) {
       { difficulty: row.difficulty || "" },
       { progress: row.progress || "" },
     ],
+    author: accounts.getLoginFromId(row.user_id),
   };
 }
 
 export function getSaveSummaries(user_id) {
-  if (user_id === -1) {
-    const rows = db.getAllData("SELECT id, name, difficulty, progress FROM saves");
+  if (accounts.isAdmin(user_id)) {
+    const rows = db.getAllData("SELECT id, name, difficulty, progress, user_id FROM saves");
     return rows.map(rowToSave);
   }
 
@@ -24,7 +26,7 @@ export function getSaveSummaries(user_id) {
 }
 
 export function hasSave(saveId, user_id) {
-  if (user_id === -1) {
+  if (accounts.isAdmin(user_id)) {
     const row = db.getData("SELECT id FROM saves WHERE id = ?", [saveId]);
     return !!row;
   }
@@ -37,7 +39,7 @@ export function hasSave(saveId, user_id) {
 }
 
 export function getSave(saveId, user_id) {
-  if (user_id === -1) {
+  if (accounts.isAdmin(user_id)) {
     const row = db.getData("SELECT * FROM saves WHERE id = ?", [saveId]);
     return rowToSave(row);
   }

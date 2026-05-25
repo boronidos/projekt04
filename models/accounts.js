@@ -4,10 +4,6 @@ import * as bcrypt from "bcrypt";
 export async function loginAccount(login, password) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  if (login == "admin" && await bcrypt.compare("admin", hashedPassword)) {
-    return { id: -1, login: "admin" }; // Admin user id is -1
-  }
-
   const user = db.getData(
     "SELECT * FROM accounts WHERE login = ?",
     [login]
@@ -21,12 +17,29 @@ export async function loginAccount(login, password) {
   return false;
 }
 
+export function getLoginFromId(id) {
+  const existing = db.getData(
+    "SELECT * FROM accounts WHERE id = ?",
+    [id]
+  );
+
+  if (!existing) return ""
+  else {
+    return db.getData("SELECT login FROM accounts WHERE id = ?", [id]).login;
+  }
+}
+
+export function isAdmin(user_id) {
+    const admin = db.getData(
+      "SELECT admin FROM accounts WHERE id = ?",
+      [user_id]
+    );
+
+    return admin.admin != 0;
+}
+
 export async function registerAccount(login, password) {
   const hashedPassword = await bcrypt.hash(password, 10);
-
-  if (login == "admin" && await bcrypt.compare("admin", hashedPassword)) {
-    return false; // cant register admin
-  }
 
   const existing = db.getData(
     "SELECT * FROM accounts WHERE login = ?",
@@ -58,6 +71,8 @@ function requireLogin(req, res, next) {
 }
 
 export default {
+  isAdmin,
+  getLoginFromId,
   registerAccount,
   loginAccount,
   requireLogin
