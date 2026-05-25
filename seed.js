@@ -1,16 +1,16 @@
-const db = require("./db");
+import db from "./models/db.js";
 
 function seedDatabase() {
   const now = new Date().toISOString();
 
-  db.prepare("DELETE FROM saves").run();
-  db.prepare("DELETE FROM accounts").run();
+  db.db.prepare("DELETE FROM saves").run();
+  db.db.prepare("DELETE FROM accounts").run();
 
-  db.prepare("DELETE FROM sqlite_sequence WHERE name='accounts'").run();
-  db.prepare("DELETE FROM sqlite_sequence WHERE name='saves'").run();
+  db.db.prepare("DELETE FROM sqlite_sequence WHERE name='accounts'").run();
+  db.db.prepare("DELETE FROM sqlite_sequence WHERE name='saves'").run();
 
   // Users
-  db.prepare(
+  db.db.prepare(
     "INSERT INTO accounts (login, password, admin) VALUES (?, ?, ?)"
   ).run(
     "admin",
@@ -18,7 +18,7 @@ function seedDatabase() {
     1
   );
 
-  db.prepare(
+  db.db.prepare(
     "INSERT INTO accounts (login, password, admin) VALUES (?, ?, ?)"
   ).run(
     "user1",
@@ -26,7 +26,7 @@ function seedDatabase() {
     0
   );
 
-  db.prepare(
+  db.db.prepare(
     "INSERT INTO accounts (login, password, admin) VALUES (?, ?, ?)"
   ).run(
     "user2",
@@ -35,27 +35,27 @@ function seedDatabase() {
   );
 
   // Saves
-  db.prepare(
+  db.db.prepare(
     "INSERT INTO saves (user_id, name, difficulty, progress, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)"
   ).run(1, "save-u1-01", "hard", "74%", now, now);
 
-  db.prepare(
+  db.db.prepare(
     "INSERT INTO saves (user_id, name, difficulty, progress, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)"
   ).run(1, "save-u1-02", "medium", "36%", now, now);
 
-  db.prepare(
+  db.db.prepare(
     "INSERT INTO saves (user_id, name, difficulty, progress, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)"
   ).run(2, "save-u2-01", "easy", "50%", now, now);
 
-  db.prepare(
+  db.db.prepare(
     "INSERT INTO saves (user_id, name, difficulty, progress, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)"
   ).run(2, "save-u2-02", "hard", "90%", now, now);
 
-  db.prepare(
+  db.db.prepare(
     "INSERT INTO saves (user_id, name, difficulty, progress, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)"
   ).run(3, "admin-save-01", "nightmare", "100%", now, now);
 
-  db.prepare(
+  db.db.prepare(
     "INSERT INTO saves (user_id, name, difficulty, progress, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)"
   ).run(3, "admin-save-02", "impossible", "0%", now, now);
 
