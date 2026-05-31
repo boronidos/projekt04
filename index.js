@@ -48,7 +48,7 @@ app.get("/new_save/", accounts.requireLogin, (req, res) => {
   });
 });
 
-app.get("/saves/:id/", (req, res) => {
+app.get("/saves/:id/", accounts.requireLogin, (req, res) => {
   console.log(req.session.user_id);
   const saveId = req.params.id;
   const save = saves.getSave(saveId, req.session.user_id) || null;
@@ -99,7 +99,7 @@ function handleNewSave(req, res) {
 app.post(["/saves/new", "/saves/new/"], handleNewSave);
 
 // Edit form
-app.get("/saves/:id/edit", (req, res) => {
+app.get("/saves/:id/edit", accounts.requireLogin, (req, res) => {
   console.log(req.session.user_id);
   const id = req.params.id;
   const save = saves.getSave(id, req.session.user_id) || null;
@@ -137,6 +137,9 @@ app.post("/register", async (req, res) => {
   if (!login || !password) {
     return res.redirect("/register?error=missing_fields");
   }
+
+  if (login.length < 3) return res.redirect("/register?error=login_short");
+  if (password.length < 3) return res.redirect("/register?error=password_short");
 
   const user = await accounts.registerAccount(login, password);
 

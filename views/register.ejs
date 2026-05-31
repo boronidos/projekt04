@@ -7,9 +7,9 @@
             <label for="login">login</label><input type="text" name="login" id="login"> <br>
             <label for="password">password</label><input type="password" name="password" id="password"> <br>
             <button type="submit">register</button>
-            <p class="error_text"><%= error === 'missing_fields' ? "Login and password required!" : error === 'user_exists' ? "User already exists!" : "" %></p>
+            <p class="error_text"><%= error === 'missing_fields' ? "Login and password required!" : error === 'user_exists' ? "User already exists!" : error === 'login_short' ? "Login has to be at least 3 characters long!" : error === 'password_short' ? "Password has to be at least 3 characters long!" : "" %></p>
         </form>
     </div>
 </main>
 
-<%- include("foot.partial.ejs") %>
+<%- include("foot.partial-3.ejs") %>

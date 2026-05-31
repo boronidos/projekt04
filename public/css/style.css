@@ -151,16 +151,17 @@ input {
     transition: ease-in 100ms;
     position: fixed;
 
-    bottom: -1vw;
+    bottom: 0.5vw;
     right: 5vw;
-    width: 3vw;
-    height: 3vw;
+
+    text-align: right;
+    white-space: nowrap;
 
     color: white;
     font-size: 1.5vw;
 }
 
-.redhead img{
+.girl-right img{
     position: fixed;
     
     pointer-events: none;
@@ -173,7 +174,7 @@ input {
     height: 20vw;
 }
 
-.greyhead img{
+.girl-left img{
     position: fixed;
     
     pointer-events: none;
@@ -182,19 +183,6 @@ input {
 
     bottom: -1vw;
     right: 12vw;
-    width: 20vw;
-    height: 20vw;
-}
-
-.purplehead img{
-    position: fixed;
-    
-    pointer-events: none;
-
-    transform: rotate(-5deg);
-
-    bottom: 20vw;
-    left: 24vw;
     width: 20vw;
     height: 20vw;
 }

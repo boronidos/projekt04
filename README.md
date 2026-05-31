@@ -14,6 +14,17 @@ FUNKCJONALNOSC:
 mozna tworzyc saves, modyfikować je, usuwać oraz oglądać. Admin ma dostęp do wszystkich saves.
 (odpalanie save nie działa bo nie ma gry zrobionej)
 
+ŚCIEŻKI:
+/ - Strona główna
+/login - logowanie
+/register - rejestrowanie
+/new_save - tworzenie save
+/saves - podgląd saves
+/saves/:id: - podgląd save
+/saves/:id:/edit - edytowanie save
+/saves/:id:/delete - usuwanie save
+
+
 
 ```text
      /\__ /\
